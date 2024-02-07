@@ -1,1 +1,14 @@
-<p>album-cover works!</p>
+<!-- // --Album covers grid Page
+
+// Filter input
+// Clicking on a album cover navigates the user to its Details page. -->
+
+<div class="card album-card p-2 m-3 d-flex flex-row">
+    <div class="cover-img">
+        <img [src]="album.strAlbumThumb" alt="Album Image">
+    </div>
+    <div class="cover-info ms-2 d-flex flex-column">
+        <span title="Album Title">Title: {{album.strAlbum}}</span>
+        <span title="Album Artist">Artist: {{album.strArtist}}</span>
+    </div>
+</div>

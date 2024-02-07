@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="m-3">
+    <label for="filter-inpt">Filter By Title: </label>
+    <input type="text" name="Filter Album" id="filter-inpt">
+</div>
+<div class="album-list row">
+    @for (item of albumList; track item.idAlbum) {
+        <app-album-cover [album]="item" (click)="goToDetail(item)"></app-album-cover>
+    }
+</div>

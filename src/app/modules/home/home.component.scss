@@ -1,0 +1,18 @@
+@import '../../../../node_modules/@bmw-ds/components/density-styles/styles/scss/density-styles-ng.scss';
+
+.album-list {
+    @include row-cols(1);
+
+    @include media-breakpoint-up(sm) {
+        @include row-cols(2);
+    }
+    @include media-breakpoint-up(lg) {
+        @include row-cols(3);
+    }
+    @include media-breakpoint-up(xl) {
+        @include row-cols(4);
+    }
+    @include media-breakpoint-up(xxl) {
+        @include row-cols(5);
+    }
+}

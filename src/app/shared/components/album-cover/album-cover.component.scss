@@ -1,0 +1,14 @@
+.album-card {
+    height: 7em;
+    width: 16em;
+    .cover-img {
+        min-width: 80.67px;
+    }
+    .cover-img >img {
+        width: 100%;
+        height: 100%;
+    }
+    .cover-info {
+        font-size: smaller;
+    }
+}

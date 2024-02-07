@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Album } from '../../../core/services/theaudiodb.service';
 
 @Component({
   selector: 'app-album-cover',
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class AlbumCoverComponent {
 
+  @Input() album = {} as Album;
+  
 }

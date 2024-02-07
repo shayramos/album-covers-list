@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { response } from 'express';
+import { Observable, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class TheaudiodbService {
   constructor(private httpService: HttpClient) { }
 
   getAlbumList(): Observable<Album[]> {
-    return this.httpService.get<Album[]>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
+    return this.httpService.get<any>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
+      .pipe( map((response) => response.album as Album[]) )
   }
 }
 
