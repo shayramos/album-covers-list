@@ -1,0 +1,25 @@
+<h1 class="p-4 w-100 justify-content-center d-flex">Album Details</h1>
+@if (album) {
+    <div class="p-4 d-flex flex-row">
+        <div class="pe-2 w-25 left-section">
+            <img [appModalTrigger]="modalCoverTemplate" role="button" [src]="album.strAlbumThumb" alt="Cover Image">
+        </div>
+        <div class="ps-2 w-75 right-section">
+            <a [routerLink]="['/home']">Back</a>
+            <div> Album: {{album.strAlbum}}</div>
+            <div> Artist: {{album.strArtist}}</div>
+            <div> Year Released: {{album.intYearReleased}}</div>
+            <div> Style: {{album.strStyle}}</div>
+            <div> Genre: {{album.strGenre}}</div>
+            <div> Mood: {{album.strMood}}</div>
+            <div> Review: {{album.strReview}}</div>
+            <div> Description: {{album.strDescriptionEN}}</div>
+        </div>
+    </div>
+}
+
+<ng-template #modalCoverTemplate>
+    <div class="modal-content">
+        <img class="img-modal" [src]="album.strAlbumThumb" alt="Cover Image Modal">
+   </div>
+</ng-template>

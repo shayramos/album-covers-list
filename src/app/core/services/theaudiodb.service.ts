@@ -16,6 +16,13 @@ export class TheaudiodbService {
     return this.httpService.get<any>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
       .pipe( map((response) => response.album as Album[]) )
   }
+
+  getAlbum(idAlbum: string): Observable<Album> {
+    return this.httpService.get<any>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
+      .pipe(
+        map((response) => (response.album as Album[]).find((resp) => resp.idAlbum === idAlbum) as Album )
+      )
+  }
 }
 
 export interface Album {
@@ -25,4 +32,8 @@ export interface Album {
   strStyle: string
   strAlbumThumb: string
   strDescriptionEN: string
+  intYearReleased: string
+  strGenre: string
+  strReview: string
+  strMood: string
 }

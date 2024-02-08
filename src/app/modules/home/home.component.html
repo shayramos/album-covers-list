@@ -4,6 +4,6 @@
 </div>
 <div class="album-list row">
     @for (item of albumList; track item.idAlbum) {
-        <app-album-cover [album]="item" (click)="goToDetail(item)"></app-album-cover>
+        <app-album-cover role='button' [album]="item" [routerLink]="['/album-detail', item.idAlbum]"></app-album-cover>
     }
 </div>
