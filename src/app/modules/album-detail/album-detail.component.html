@@ -1,11 +1,13 @@
-<h1 class="p-4 w-100 justify-content-center d-flex">Album Details</h1>
+<section id="detail-page">
+    <h1 class="p-4 w-100 justify-content-center d-flex">Album Details</h1>
+</section>
 @if (album) {
+    <a class="p-4" id="back-btn" [routerLink]="['/home']"> Back </a>
     <div class="p-4 d-flex flex-row">
-        <div class="pe-2 w-25 left-section">
+        <section class="pe-2 w-25 left-section">
             <img [appModalTrigger]="modalCoverTemplate" role="button" [src]="album.strAlbumThumb" alt="Cover Image">
-        </div>
-        <div class="ps-2 w-75 right-section">
-            <a [routerLink]="['/home']">Back</a>
+        </section>
+        <section class="ps-2 w-75">
             <div> Album: {{album.strAlbum}}</div>
             <div> Artist: {{album.strArtist}}</div>
             <div> Year Released: {{album.intYearReleased}}</div>
@@ -14,7 +16,7 @@
             <div> Mood: {{album.strMood}}</div>
             <div> Review: {{album.strReview}}</div>
             <div> Description: {{album.strDescriptionEN}}</div>
-        </div>
+        </section>
     </div>
 }
 

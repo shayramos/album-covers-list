@@ -1,4 +1,13 @@
 <div class="header d-flex align-items-center">
     <div class="h-title p-2">Title</div>
-    <div class="h-login p-2 ms-auto">Login/Logout</div>
+    <div class="h-login p-2 ms-auto" role='button'>
+    @if (isLoggedIn) {
+        <span>{{userName}}</span>
+        <span (click)="logout()">Logout</span>
+    } @else {
+        <span [routerLink]="['/login']">
+            Login
+        </span>
+    }
+    </div>
 </div>

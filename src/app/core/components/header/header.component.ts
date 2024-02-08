@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  // If logged in, it must have the username and a logout button that navigates back to the Login page.
+  @Input() isLoggedIn = false;
+  @Input() userName = 'Nome do Usuário'; //TODO
+
+  constructor(private localStorageService: LocalStorageService) { }
+  
+  logout () {
+    this.localStorageService.logout();
+  }
 }
