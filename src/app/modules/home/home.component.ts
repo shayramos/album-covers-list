@@ -4,22 +4,29 @@ import { AlbumCoverComponent } from "../../shared/components/album-cover/album-c
 import { RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from '../../shared/pipe/filter.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  imports: [AlbumCoverComponent, RouterModule]
+  imports: [CommonModule, AlbumCoverComponent, RouterModule, ReactiveFormsModule, FilterPipe]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  albumList = [] as Album[];  
+  albumList = [] as Album[];
+  filterControl = new FormControl();
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(private theaudiodbService: TheaudiodbService) {} 
 
   ngOnInit(): void {
-    this.theaudiodbService.getAlbumList().pipe(takeUntil(this.destroy$)).subscribe((resp: Album[]) => {
+    this.theaudiodbService.getAlbumList()
+    .pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((resp: Album[]) => {
       this.albumList = resp;
     })
   }

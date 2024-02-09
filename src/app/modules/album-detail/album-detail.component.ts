@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Album, TheaudiodbService } from '../../core/services/theaudiodb.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalTriggerDirective } from '../../shared/directives/modal-trigger.directive';
 import { Subject } from 'rxjs';
@@ -15,22 +15,25 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AlbumDetailComponent implements OnInit, OnDestroy {
 
-// TODO: Clicking on the album cover image opens a modal (using Angular CDK overlay) with a bigger version (like a zoom).
-
   album = {} as Album;
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(private route: ActivatedRoute,
-    private theaudiodbService: TheaudiodbService) {} 
+    private theaudiodbService: TheaudiodbService,
+    private router: Router) {} 
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') as string;
-    if (id) {
-      this.theaudiodbService.getAlbum(id).pipe(takeUntil(this.destroy$)).subscribe((resp: Album) => {
+    const idAlbum = this.route.snapshot.paramMap.get('id') as string;
+    if (idAlbum) {
+      this.theaudiodbService.getAlbum(idAlbum)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((resp: Album) => {
         this.album = resp;
       });
     } else {
-      // TODO: Redirecionar para home
+      this.router.navigate(['/login']);
     }
   }
   

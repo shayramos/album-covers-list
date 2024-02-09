@@ -11,7 +11,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class HeaderComponent {
   @Input() isLoggedIn = false;
-  @Input() userName = 'Nome do Usuário'; //TODO
+  @Input() userName = 'Nome do Usuário';
 
   constructor(private localStorageService: LocalStorageService) { }
   

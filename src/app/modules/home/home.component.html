@@ -1,9 +1,13 @@
-<div class="m-3">
-    <label for="filter-inpt">Filter By Title: </label>
-    <input type="text" name="Filter Album" id="filter-inpt">
+<div class="m-5 d-flex flex-column">
+    <label class="mb-1" for="filter-inpt">Filter By Title: </label>
+    <input type="text" name="Filter Album" id="filter-inpt" [formControl]="filterControl">
 </div>
 <div class="album-list row">
-    @for (item of albumList; track item.idAlbum) {
-        <app-album-cover role='button' [album]="item" [routerLink]="['/album-detail', item.idAlbum]"></app-album-cover>
+    @for (item of albumList | appFilter: filterControl.value : 'strAlbum'; track item.idAlbum) {
+        <app-album-cover role='button'
+            class="d-flex justify-content-center"
+            [album]="item"
+            [routerLink]="['/album-detail', item.idAlbum]">
+        </app-album-cover>
     }
 </div>

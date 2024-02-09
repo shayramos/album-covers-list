@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./core/components/header/header.component";
 import { CommonModule } from '@angular/common';
@@ -16,15 +16,27 @@ import { LocalStorageService } from './core/services/local-storage.service';
     HeaderComponent
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'album-covers-list';
   isLoggedIn = false;
+  userName = 'Usuário sem nome';
 
   constructor(private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
-    this.localStorageService.isLoggedIn$.subscribe((resp) => {
+    this.setSavedCredentials();
+    this.localStorageService.isLoggedIn.subscribe((resp) => {
       this.isLoggedIn = resp;
+      const userCredentials = this.localStorageService.getUserCredentials();
+      this.userName = userCredentials ? JSON.parse(userCredentials).userName : '';
     })
+  }
+
+  setSavedCredentials(): void {
+    const userCredentials = this.localStorageService.getUserCredentials();
+    if (userCredentials) {
+      this.isLoggedIn = true;
+      this.userName = JSON.parse(userCredentials).userName;
+    }
   }
 }

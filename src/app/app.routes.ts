@@ -16,6 +16,5 @@ export const routes: Routes = [
     {
         path: 'album-detail/:id',
         component: AlbumDetailComponent
-        // TODO: loadChildren:
     },
 ];

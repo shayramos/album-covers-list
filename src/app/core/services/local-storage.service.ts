@@ -7,13 +7,23 @@ import { Subject } from 'rxjs';
 })
 export class LocalStorageService {
 
-  isLoggedIn$ = new Subject<boolean>();
+  private isLoggedIn$ = new Subject<boolean>();
+  isLoggedIn = this.isLoggedIn$.asObservable();
 
   constructor(private router: Router) { }
 
+  login(userInfo: string) {
+    if (!userInfo) {
+      return;
+    }
+    this.setUserCredentials(userInfo);
+    this.isLoggedIn$.next(true);
+    this.router.navigate(['/home']);
+  }
+
   logout(): void {
-    this.isLoggedIn$.next(false);
     this.removeUserCredentials();
+    this.isLoggedIn$.next(false);
     this.router.navigate(['/login']);
   }
 
@@ -21,8 +31,8 @@ export class LocalStorageService {
     localStorage.setItem('user-credentials', item);
   }
   
-  getUserCredentials(): any {
-    return localStorage.getItem('user-credentials');
+  getUserCredentials(): string {
+    return localStorage.getItem('user-credentials') as string;
   }
 
   removeUserCredentials(): void {

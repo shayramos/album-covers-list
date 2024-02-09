@@ -7,17 +7,21 @@ import { Observable, map } from 'rxjs';
 })
 export class TheaudiodbService {
 
-  private beseUrl = 'https://www.theaudiodb.com/api/v1/json/2/';
+  private beseUrl = 'https://www.theaudiodb.com/api/v1/json/2/searchalbum.php';
   
   constructor(private httpService: HttpClient) { }
 
+  // Return all Album details from artist name
   getAlbumList(): Observable<Album[]> {
-    return this.httpService.get<any>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
+    const artistName = 'daft_punk';
+    return this.httpService.get<any>(`${this.beseUrl}?s=${artistName}`)
       .pipe( map((response) => response.album as Album[]) )
   }
 
+  // Return single album details from artist + album name
   getAlbum(idAlbum: string): Observable<Album> {
-    return this.httpService.get<any>(`${this.beseUrl}searchalbum.php?s=daft_punk`)
+    const artistName = 'daft_punk';
+    return this.httpService.get<any>(`${this.beseUrl}?s=${artistName}`)
       .pipe(
         map((response) => (response.album as Album[]).find((resp) => resp.idAlbum === idAlbum) as Album )
       )

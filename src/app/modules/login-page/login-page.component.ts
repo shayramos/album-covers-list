@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../core/services/local-storage.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,18 +11,19 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
 
-  constructor (private localStorageService: LocalStorageService, private router: Router) {}
-
   loginGroup = new FormGroup({
-    userName: new FormControl('', Validators.required),
+    userName: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
   })
+  
+  constructor (private localStorageService: LocalStorageService) {}
 
   login() {
+    if (!this.loginGroup.valid) {
+      return;
+    }
     const userInfo = this.loginGroup.value;
-    this.localStorageService.setUserCredentials(JSON.stringify(userInfo));
-    this.router.navigate(['/home']);
-    this.localStorageService.isLoggedIn$.next(true);
+    this.localStorageService.login(JSON.stringify(userInfo));
   }
 
 }
