@@ -1,20 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
+import { TheaudiodbService } from '../../core/services/theaudiodb.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let theaudiodbService: jasmine.SpyObj<TheaudiodbService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HomeComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    theaudiodbService = jasmine.createSpyObj('TheaudiodbService', ['getAlbum']);
+
+    component = new HomeComponent(theaudiodbService);
   });
 
   it('should create', () => {
